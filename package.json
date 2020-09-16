@@ -1,7 +1,7 @@
 {
-  "name": "@dicta.io/new-filestorage",
+  "name": "@dicta.io/new-filesystem",
   "version": "1.0.0",
-  "description": "example of dictadata filestorage class",
+  "description": "example of dictadata filesystem class",
   "main": "index.js",
   "directories": {
     "lib": "lib",
@@ -12,20 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/dictadata/new-filestorage.git"
+    "url": "git+ssh://git@gitlab.com/dictadata/new-filesystem.git"
   },
   "keywords": [
     "dictadata",
     "storage",
-    "filestorage"
+    "filesystem"
   ],
   "author": "Drew O. Letcher",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/dictadata/new-filestorage/issues"
+    "url": "https://gitlab.com/dictadata/new-filesystem/issues"
   },
-  "homepage": "https://gitlab.com/dictadata/new-filestorage#readme",
+  "homepage": "https://gitlab.com/dictadata/new-filesystem#readme",
   "dependencies": {
+    "@dictadata/storage-junctions": "^1.2.0",
     "winston": "^3.3.3"
   }
 }
