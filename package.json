@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://gitlab.com/dictadata/new-filestorage/issues"
   },
-  "homepage": "https://gitlab.com/dictadata/new-filestorage#readme"
+  "homepage": "https://gitlab.com/dictadata/new-filestorage#readme",
+  "dependencies": {
+    "winston": "^3.3.3"
+  }
 }
