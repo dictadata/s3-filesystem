@@ -4,7 +4,6 @@
 "use strict";
 
 const storage = require("@dictadata/storage-junctions");
-const NewstoreJunction = require("../../lib/filesystems/new-filesystem");
 const logger = require('../../lib/logger');
 const fs = require('fs');
 

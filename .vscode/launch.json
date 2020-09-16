@@ -7,21 +7,6 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Run Test",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run-script",
-        "test"
-      ],
-      "port": 9229,
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
-      "outputCapture": "std"
-    },
-    {
-      "type": "node",
-      "request": "launch",
       "name": "newfs list",
       "program": "${workspaceFolder}/test/newfs/list.js",
       "outputCapture": "std",
