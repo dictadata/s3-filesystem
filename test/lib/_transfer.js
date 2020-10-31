@@ -6,10 +6,9 @@
 const storage = require("@dictadata/storage-junctions");
 const logger = require('../../lib/logger');
 
-const fs = require('fs');
-const stream = require('stream');
-const util = require('util');
-const pipeline = util.promisify(stream.pipeline);
+const fs = require('fs/promises');
+const stream = require('stream/promises');
+
 
 /**
  * transfer fucntion
@@ -26,7 +25,7 @@ module.exports = exports = async function (tract) {
     // load encoding from origin for validation
     let encoding = tract.origin.encoding;
     if (typeof encoding === "string")
-      encoding = JSON.parse(fs.readFileSync(encoding, "utf8"));
+      encoding = JSON.parse(await fs.readFile(encoding, "utf8"));
     if (typeof encoding === "object")
       encoding = await jo.putEncoding(encoding);
     else
@@ -39,18 +38,18 @@ module.exports = exports = async function (tract) {
       // use configured encoding
       encoding = tract.terminal.encoding;
       if (typeof encoding === "string")
-        encoding = JSON.parse(fs.readFileSync(encoding, "utf8"));
+        encoding = JSON.parse(await fs.readFile(encoding, "utf8"));
     }
     else {
       // run some objects through any transforms to get terminal encoding
       logger.verbose("build codify pipeline");
       let pipes = [];
       pipes.push(jo.getReadStream({ max_read: 100 }));
-      for (let [tfType,tfOptions] of Object.entries(transforms))
+      for (let [tfType, tfOptions] of Object.entries(transforms))
         pipes.push(jo.getTransform(tfType, tfOptions));
       let ct = jo.getTransform('codify');
       pipes.push(ct);
-      await pipeline(pipes);
+      await stream.pipeline(pipes);
       encoding = await ct.getEncoding();
     }
     logger.debug(">>> encoding results");
@@ -65,11 +64,11 @@ module.exports = exports = async function (tract) {
     logger.info(">>> transfer pipeline");
     let pipes = [];
     pipes.push(jo.getReadStream());
-    for (let [tfType,tfOptions] of Object.entries(transforms))
+    for (let [tfType, tfOptions] of Object.entries(transforms))
       pipes.push(jo.getTransform(tfType, tfOptions));
     pipes.push(jt.getWriteStream());
 
-    await pipeline(pipes);
+    await stream.pipeline(pipes);
 
     logger.info(">>> completed");
   }

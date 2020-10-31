@@ -25,6 +25,9 @@
     "url": "https://gitlab.com/dictadata/new-filesystem/issues"
   },
   "homepage": "https://gitlab.com/dictadata/new-filesystem#readme",
+  "engines": {
+    "node": ">=15.0.1"
+  },
   "dependencies": {
     "@dictadata/storage-junctions": "^1.2.0",
     "winston": "^3.3.3"
