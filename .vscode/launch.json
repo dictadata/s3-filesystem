@@ -5,7 +5,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "type": "pwa-node",
       "request": "launch",
       "name": "newfs list",
       "program": "${workspaceFolder}/test/newfs/list.js",
@@ -15,7 +15,7 @@
       }
     },
     {
-      "type": "node",
+      "type": "pwa-node",
       "request": "launch",
       "name": "newfs transfer",
       "program": "${workspaceFolder}/test/newfs/transfer.js",

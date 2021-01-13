@@ -1,6 +1,6 @@
 {
   "name": "@dicta.io/new-filesystem",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "example of dictadata filesystem class",
   "main": "index.js",
   "directories": {
@@ -29,7 +29,7 @@
     "node": ">=15.0.1"
   },
   "dependencies": {
-    "@dictadata/storage-junctions": "^1.2.0",
+    "@dictadata/storage-junctions": "^1.2.6",
     "winston": "^3.3.3"
   }
 }
