@@ -7,20 +7,39 @@
     {
       "type": "pwa-node",
       "request": "launch",
-      "name": "newfs list",
-      "program": "${workspaceFolder}/test/newfs/list.js",
+      "name": "AWS check",
+      "program": "${workspaceFolder}/test/s3/aws_credentials.js"
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "s3 list",
+      "program": "${workspaceFolder}/test/s3/list.js",
       "outputCapture": "std",
       "env": {
-        "LOG_LEVEL": "debug"
+        "NODE_ENV": "development",
+        "LOG_LEVEL": "verbose"
       }
     },
     {
       "type": "pwa-node",
       "request": "launch",
-      "name": "newfs transfer",
-      "program": "${workspaceFolder}/test/newfs/transfer.js",
+      "name": "s3 transfers",
+      "program": "${workspaceFolder}/test/s3/transfers.js",
       "outputCapture": "std",
       "env": {
+        "NODE_ENV": "development",
+        "LOG_LEVEL": "verbose"
+      }
+    },
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "s3 up/download",
+      "program": "${workspaceFolder}/test/s3/up_download.js",
+      "outputCapture": "std",
+      "env": {
+        "NODE_ENV": "development",
         "LOG_LEVEL": "verbose"
       }
     }

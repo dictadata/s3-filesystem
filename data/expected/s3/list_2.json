@@ -1,0 +1,29 @@
+[
+  {
+    "Key": "data/test/foofile_01.json",
+    "ETag": "\"11c9a15830efe43c36a0f9982684236a\"",
+    "StorageClass": "STANDARD",
+    "name": "foofile_01.json",
+    "rpath": "test/foofile_01.json",
+    "size": 1729,
+    "date": "2021-04-02T15:31:01.000Z"
+  },
+  {
+    "Key": "data/test/foofile_02.json",
+    "ETag": "\"11c9a15830efe43c36a0f9982684236a\"",
+    "StorageClass": "STANDARD",
+    "name": "foofile_02.json",
+    "rpath": "test/foofile_02.json",
+    "size": 1729,
+    "date": "2021-04-02T15:31:01.000Z"
+  },
+  {
+    "Key": "data/test/foofile_03.json",
+    "ETag": "\"11c9a15830efe43c36a0f9982684236a\"",
+    "StorageClass": "STANDARD",
+    "name": "foofile_03.json",
+    "rpath": "test/foofile_03.json",
+    "size": 1729,
+    "date": "2021-04-02T15:31:02.000Z"
+  }
+]
