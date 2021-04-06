@@ -1,8 +1,8 @@
 // filesystems/s3-filesystem
 "use strict";
 
-const { StorageFileSystem, StorageResults, StorageError } = require("@dictadata/storage-junctions");
-const logger = require("../logger");
+const { StorageFileSystem, StorageResponse, StorageError } = require("@dictadata/storage-junctions");
+const { logger } = require("@dictadata/storage-junctions").utils;
 
 const AWS = require("aws-sdk");
 const { PassThrough } = require('stream');
@@ -122,7 +122,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
           }
         }
       }
-      return new StorageResults(0, null, list);
+      return new StorageResponse(0, null, list);
     }
     catch (err) {
       logger.error(err);
@@ -148,7 +148,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
 
       let rs = await s3.deleteObject(s3params);
 
-      return new StorageResults(0);
+      return new StorageResponse(0);
     }
     catch (err) {
       logger.error(err);
@@ -260,7 +260,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
       // save to local file
       rs.pipe(fs.createWriteStream(dest));
 
-      return new StorageResults(resultCode);
+      return new StorageResponse(resultCode);
     }
     catch (err) {
       logger.error(err);
@@ -292,7 +292,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
 
       await s3.upload(s3params).promise();
 
-      return new StorageResults(resultCode);
+      return new StorageResponse(resultCode);
     }
     catch (err) {
       logger.error(err);
