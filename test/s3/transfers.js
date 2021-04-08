@@ -12,9 +12,9 @@ logger.info("=== Test: S3 transfers");
 async function s3Destination() {
   logger.verbose("=== S3 destination");
 
-  logger.verbose('=== S3: csv_output.csv');
+  logger.verbose('=== s3: csv_output.csv');
   if (await dullSchema({
-    smt: "csv|S3:dictadata.org/data/output/csv/|output.csv|*"
+    smt: "csv|s3:dictadata.org/data/output/csv/|output.csv|*"
   })) return 1;
   
   if (await transfer({
@@ -25,7 +25,7 @@ async function s3Destination() {
       }
     },
     terminal: {
-      smt: "csv|S3:dictadata.org/data/output/csv/|output.csv|*",
+      smt: "csv|s3:dictadata.org/data/output/csv/|output.csv|*",
       options: {
         header: true,
         "s3": {
@@ -35,7 +35,7 @@ async function s3Destination() {
     }
   })) return 1;
 
-  logger.verbose('=== S3: csv_output.csv.gz');
+  logger.verbose('=== s3: csv_output.csv.gz');
   if (await transfer({
     origin: {
       smt: "csv|./data/test/|foofile.csv|*",
@@ -44,7 +44,7 @@ async function s3Destination() {
       }
     },
     terminal: {
-      smt: "csv|S3:dictadata.org/data/output/csv/|output.csv.gz|*",
+      smt: "csv|s3:dictadata.org/data/output/csv/|output.csv.gz|*",
       options: {
         header: true,
         "s3": {
@@ -54,13 +54,13 @@ async function s3Destination() {
     }
   })) return 1;
 
-  logger.verbose('=== S3: json_output.json');
+  logger.verbose('=== s3: json_output.json');
   if (await transfer({
     origin: {
       smt: "json|./data/test/|foofile.json.gz|*"
     },
     terminal: {
-      smt: "json|S3:dictadata.org/data/output/json/|output.json|*",
+      smt: "json|s3:dictadata.org/data/output/json/|output.json|*",
       options: {
         "s3": {
           "aws_profile": ""
@@ -69,13 +69,13 @@ async function s3Destination() {
     }
   })) return 1;
 
-  logger.verbose('=== S3: json_output.json.gz');
+  logger.verbose('=== s3: json_output.json.gz');
   if (await transfer({
     origin: {
       smt: "json|./data/test/|foofile.json|*"
     },
     terminal: {
-      smt: "json|S3:dictadata.org/data/output/json/|output.json.gz|*",
+      smt: "json|s3:dictadata.org/data/output/json/|output.json.gz|*",
       options: {
         "s3": {
           "aws_profile": ""
@@ -92,7 +92,7 @@ async function s3Source() {
   logger.verbose('=== s3_output.csv');
   if (await transfer({
     origin: {
-      smt: "csv|S3:dictadata.org/data/test/|foofile.csv.gz|*",
+      smt: "csv|s3:dictadata.org/data/test/|foofile.csv.gz|*",
       options: {
         header: true,
         "s3": {
@@ -111,7 +111,7 @@ async function s3Source() {
   logger.verbose('=== s3_output.csv.gz');
   if (await transfer({
     origin: {
-      smt: "csv|S3:dictadata.org/data/test/|foofile.csv|*",
+      smt: "csv|s3:dictadata.org/data/test/|foofile.csv|*",
       options: {
         header: true,
         "s3": {
@@ -130,7 +130,7 @@ async function s3Source() {
   logger.verbose('=== s3_output.json');
   if (await transfer({
     origin: {
-      smt: "json|S3:dictadata.org/data/test/|foofile.json.gz|*",
+      smt: "json|s3:dictadata.org/data/test/|foofile.json.gz|*",
       options: {
         "s3": {
           "aws_profile": ""
@@ -145,7 +145,7 @@ async function s3Source() {
   logger.verbose('=== s3_output.json.gz');
   if (await transfer({
     origin: {
-      smt: "json|S3:dictadata.org/data/test/|foofile.json|*",
+      smt: "json|s3:dictadata.org/data/test/|foofile.json|*",
       options: {
         "s3": {
           "aws_profile": ""

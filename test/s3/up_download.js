@@ -14,7 +14,7 @@ async function test_1() {
 
   if (await download({
     origin: {
-      smt: "*|S3:dictadata.org/data/test/|*.csv|*",
+      smt: "*|s3:dictadata.org/data/test/|*.csv|*",
       options: {
         recursive: false
       }
@@ -38,7 +38,7 @@ async function test_2() {
       }
     },
     terminal: {
-      smt: "*|S3:dictadata.org/data/output/uploads/|*|*",
+      smt: "*|s3:dictadata.org/data/output/uploads/|*|*",
       options: {}
     }
   })) return 1;
@@ -55,7 +55,7 @@ async function test_3() {
       }
     },
     terminal: {
-      smt: "*|S3:dictadata.org/shapefiles/United States/Iowa/|*|*",
+      smt: "*|s3:dictadata.org/shapefiles/United States/Iowa/|*|*",
       options: {
         useRPath: true
       }
@@ -68,7 +68,7 @@ async function test_4() {
 
   if (await download({
     origin: {
-      smt: "*|S3:dictadata.org/shapefiles/|*.*|*",
+      smt: "*|s3:dictadata.org/shapefiles/|*.*|*",
       options: {
         recursive: true
       }
