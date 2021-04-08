@@ -1,5 +1,4 @@
-dist/
-output/
+data/output/
 
 log/
 *.log
