@@ -29,7 +29,7 @@
     "node": ">=15.0.1"
   },
   "dependencies": {
-    "@dictadata/storage-junctions": "^1.7.1",
+    "@dictadata/storage-junctions": "^1.7.3",
     "aws-sdk": "^2.878.0",
     "winston": "^3.3.3"
   },

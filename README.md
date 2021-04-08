@@ -1,3 +1,48 @@
 # s3-filesystem
 
-Example project for create a dictadata filesystem plugin.
+S3 filesystem plugin for @dictadata/storage-junctions.
+
+## Installation
+
+```bash
+npm i @dictadata/storage-junctions
+npm i @dictadata/s3-filesystem
+```
+
+## Registering the Plugin
+
+```javascript
+const storage = require("@dictadata/storage-junctions");
+const S3FileSystem = require("@dictadata/s3-filesystem");
+
+storage.FileSystems.use("s3", S3FileSystem);
+```
+
+## Usage in Storage Memory Trace
+
+Example SMT string for accessing json files in an S3 bucket.
+
+```javascript
+let smt = "json|s3:dictadata.org/data/|foo_*|*"
+```
+
+Where:
+
+- "json" - ***smt model*** of junction used to encode and query data in the storage source.
+- "s3:dictadata.org/data/" - ***smt locus*** locator address for the storage source.
+  - "S3" - ***filesystem model*** used to access data containers in the storage source.
+  - "dictadata.org" - *S3 bucket* name.
+  - "/data/" - *S3 prefix* for object names.
+- "foo_*" - ***smt schema*** specification for *S3 object names* with wildcard.
+- "*" - ***smt key*** \* represents all constructs.
+
+## Support Junction Methods
+
+Storage FileSystems support the following Storage Junction methods.
+
+- encoding - schema encoding for constructs in the file.
+- list()
+- getEncoding() - *uses the Codify tranform to analyze constructs in the file.*
+- dullSchema()
+- createReadStream()
+- createWriteStream()
