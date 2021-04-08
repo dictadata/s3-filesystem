@@ -1,14 +1,10 @@
 {
   "name": "@dictadata/s3-filesystem",
   "version": "1.7.1",
-  "description": "example of dictadata filesystem class",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  },
+  "description": "S3 filesystem plugin for @dictadata/storage-junctions.",
+  "main": "storage/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "testrunner && exit 1"
   },
   "repository": {
     "type": "git",
@@ -17,7 +13,8 @@
   "keywords": [
     "dictadata",
     "storage",
-    "filesystem"
+    "filesystem",
+    "S3"
   ],
   "author": "Drew O. Letcher",
   "license": "MIT",
