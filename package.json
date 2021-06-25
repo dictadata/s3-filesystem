@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@dictadata/storage-junctions": "^1.7.5",
-    "aws-sdk": "^2.878.0",
+    "aws-sdk": "^2.934.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {

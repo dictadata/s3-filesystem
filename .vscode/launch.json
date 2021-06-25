@@ -35,8 +35,8 @@
     {
       "type": "pwa-node",
       "request": "launch",
-      "name": "s3 up/download",
-      "program": "${workspaceFolder}/test/s3/up_download.js",
+      "name": "s3 copy",
+      "program": "${workspaceFolder}/test/s3/copy.js",
       "outputCapture": "std",
       "env": {
         "NODE_ENV": "development",

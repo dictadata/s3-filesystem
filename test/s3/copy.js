@@ -1,18 +1,18 @@
 /**
- * test/S3/up_download
+ * test/S3/replicate
  */
 "use strict";
 
 require("../register");
-const { logger } = require('@dictadata/storage-junctions').utils;
-const { download, upload } = require('@dictadata/storage-junctions').tests;
+const { logger } = require("@dictadata/storage-junctions/utils");
+const { getFile, putFile } = require('@dictadata/storage-junctions/test');
 
-logger.info("=== tests: S3 uploads/downloads");
+logger.info("=== tests: S3 copy files");
 
 async function test_1() {
   logger.info("=== download files from S3 folder");
 
-  if (await download({
+  if (await getFile({
     origin: {
       smt: "*|s3:dictadata.org/data/test/|*.csv|*",
       options: {
@@ -20,9 +20,7 @@ async function test_1() {
       }
     },
     terminal: {
-      options: {
-        downloads: "./data/output/s3/downloads/"
-      }
+      smt: "*|./data/output/s3/downloads/|*|*"
     }
   })) return 1;
 }
@@ -30,10 +28,10 @@ async function test_1() {
 async function test_2() {
   logger.info("=== upload files to S3 folder");
 
-  if (await upload({
+  if (await putFile({
     origin: {
+      smt: "*|./data/test/|*.csv|*",
       options: {
-        uploads: "./data/test/*.csv",
         recursive: false
       }
     },
@@ -47,10 +45,10 @@ async function test_2() {
 async function test_3() {
   logger.info("=== upload shape files");
 
-  if (await upload({
+  if (await putFile({
     origin: {
+      smt: "*|./data/shapefiles/United States/Iowa/|*.*|*",
       options: {
-        uploads: "./data/shapefiles/United States/Iowa/*.*",
         recursive: true
       }
     },
@@ -66,7 +64,7 @@ async function test_3() {
 async function test_4() {
   logger.info("=== download shape files");
 
-  if (await download({
+  if (await getFile({
     origin: {
       smt: "*|s3:dictadata.org/shapefiles/|*.*|*",
       options: {
@@ -74,8 +72,8 @@ async function test_4() {
       }
     },
     terminal: {
+      smt: "*|./data/output/s3/shapefiles/|*|*",
       options: {
-        downloads: "./data/output/s3/shapefiles/",
         useRPath: true
       }
     }

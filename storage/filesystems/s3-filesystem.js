@@ -1,8 +1,9 @@
 // filesystems/s3-filesystem
 "use strict";
 
-const { StorageFileSystem, StorageResponse, StorageError } = require("@dictadata/storage-junctions");
-const { logger } = require("@dictadata/storage-junctions").utils;
+const { StorageFileSystem } = require("@dictadata/storage-junctions");
+const { parseSMT, StorageResponse, StorageError } = require("@dictadata/storage-junctions/types");
+const { logger } = require("@dictadata/storage-junctions/utils");
 
 const AWS = require("aws-sdk");
 const { PassThrough } = require('stream');
@@ -232,14 +233,23 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
     }
   }
 
-  async download(options) {
+  /**
+   * get file(s) from fs filesystem, save to local folder
+   * @param {Object} options 
+   * @param {string} options.smt the smt.locus provides the destination folder
+   * @returns 
+   */
+  async getFile(options) {
     logger.debug("s3-filesystem download");
     options = Object.assign({}, this.options, options);
     let resultCode = 0;
 
     try {
       let src = options.Key;
-      let dest = path.join(options.downloads, (options.useRPath ? options.rpath : options.name));
+
+      let smt = parseSMT(options.smt); // smt.locus is destination folder
+      let folder = smt.locus.startsWith("file:") ? smt.locus.substr(5) : smt.locus;
+      let dest = path.join(folder, (options.keep_rpath ? options.rpath : options.name));
       let dirname = path.dirname(dest);
       if (dirname !== this._dirname && !fs.existsSync(dirname)) {
         await fsp.mkdir(dirname, { recursive: true });
@@ -268,14 +278,23 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
     }
   }
 
-  async upload(options) {
+  /**
+   * read file(s) from local folder, copy to fs filesystem
+   * @param {Object} options 
+   * @param {string} options.smt smt.locus provides the source folder and smt.schema the filespec
+   * @returns 
+   */
+  async putFile(options) {
     logger.debug("s3-filesystem upload");
     options = Object.assign({}, this.options, options);
     let resultCode = 0;
 
     try {
+      let smt = parseSMT(options.smt); // smt.locus is source folder
+      let folder = smt.locus.startsWith("file:") ? smt.locus.substr(5) : smt.locus;
+      let src = path.join(folder, options.rpath);
+
       let [bucket, prefix] = this.splitLocus();
-      let src = path.join(options.uploadPath, options.rpath);
       let dest = prefix + (options.useRPath ? options.rpath : options.name).split(path.sep).join(path.posix.sep);
       logger.verbose("  " + src + " >> " + dest);
 

@@ -1,10 +1,10 @@
 /**
- * test/transportdb-junction
+ * test/register
  */
 "use strict";
 
 const storage = require("@dictadata/storage-junctions");
-const logger = storage.utils.logger;
+const { logger } = require("@dictadata/storage-junctions/utils");
 
 const S3FileSystem = require("../storage/filesystems/s3-filesystem");
 
