@@ -1,6 +1,6 @@
 {
   "name": "@dictadata/s3-filesystem",
-  "version": "1.7.3",
+  "version": "1.8.0",
   "description": "S3 filesystem plugin for @dictadata/storage-junctions.",
   "main": "storage/index.js",
   "scripts": {
@@ -26,8 +26,8 @@
     "node": ">=15.0.1"
   },
   "dependencies": {
-    "@dictadata/storage-junctions": "^1.7.5",
-    "aws-sdk": "^2.934.0",
+    "@dictadata/storage-junctions": "^1.8.0",
+    "aws-sdk": "^2.935.0",
     "winston": "^3.3.3"
   },
   "devDependencies": {

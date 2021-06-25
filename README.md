@@ -1,4 +1,4 @@
-# s3-filesystem
+# s3-filesystem 1.8.x
 
 S3 filesystem plugin for @dictadata/storage-junctions.
 
@@ -23,7 +23,7 @@ storage.FileSystems.use("s3", S3FileSystem);
 Example SMT string for accessing json files in an S3 bucket.
 
 ```javascript
-let smt = "json|s3:dictadata.org/data/|foo_*|*"
+let smt = "json|s3:dictadata.org/data/|foofile.json|*"
 ```
 
 Where:
@@ -38,11 +38,11 @@ Where:
 
 ## Support Junction Methods
 
-Storage FileSystems support the following Storage Junction methods.
+Storage FileSystems support the following methods.
 
-- encoding - schema encoding for constructs in the file.
 - list()
-- getEncoding() - *uses the Codify tranform to analyze constructs in the file.*
-- dullSchema()
 - createReadStream()
 - createWriteStream()
+- getFile()
+- putFile()
+- dull()
