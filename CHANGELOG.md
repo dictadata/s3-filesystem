@@ -1,5 +1,7 @@
 # CHANGELOG
 
+- version 1.8.2
+  - update to @dictadata/storage-junctions 1.8.2
 - version 1.8.0
   - update to @dictadata/storage-junctions 1.8.0
   - rename upload/download methods to putFile/getFile
