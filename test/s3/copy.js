@@ -14,13 +14,13 @@ async function test_1() {
 
   if (await getFile({
     origin: {
-      smt: "*|s3:dictadata.org/data/test/|*.csv|*",
+      smt: "*|s3:dictadata.org/data/test/input/|*.json|*",
       options: {
         recursive: false
       }
     },
     terminal: {
-      smt: "*|./data/output/s3/downloads/|*|*"
+      smt: "*|./test/data/output/s3/downloads/|*|*"
     }
   })) return 1;
 }
@@ -30,13 +30,13 @@ async function test_2() {
 
   if (await putFile({
     origin: {
-      smt: "*|./data/test/|*.csv|*",
+      smt: "*|./test/data/input/|*.json|*",
       options: {
         recursive: false
       }
     },
     terminal: {
-      smt: "*|s3:dictadata.org/data/output/uploads/|*|*",
+      smt: "*|s3:dictadata.org/data/test/output/uploads/|*|*",
       options: {}
     }
   })) return 1;
@@ -47,13 +47,13 @@ async function test_3() {
 
   if (await putFile({
     origin: {
-      smt: "*|./data/shapefiles/United States/Iowa/|*.*|*",
+      smt: "*|/var/data/sos.iowa.gov/shapefiles/City Precincts/|*.*|*",
       options: {
         recursive: true
       }
     },
     terminal: {
-      smt: "*|s3:dictadata.org/shapefiles/United States/Iowa/|*|*",
+      smt: "*|s3:dictadata.org/data/sos.iowa.gov/shapefiles/City Precincts/|*|*",
       options: {
         useRPath: true
       }
@@ -66,13 +66,13 @@ async function test_4() {
 
   if (await getFile({
     origin: {
-      smt: "*|s3:dictadata.org/shapefiles/|*.*|*",
+      smt: "*|s3:dictadata.org/data/sos.iowa.gov/shapefiles/City Precincts/|*.*|*",
       options: {
         recursive: true
       }
     },
     terminal: {
-      smt: "*|./data/output/s3/shapefiles/|*|*",
+      smt: "*|./test/data/output/s3/shapefiles/|*|*",
       options: {
         useRPath: true
       }
