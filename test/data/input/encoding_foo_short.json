@@ -1,13 +1,15 @@
 {
-  "model": "*",
-  "locus": "*",
-  "schema": "foo_schema",
-  "key": "*",
+  "smt": {
+    "model": "*",
+    "locus": "*",
+    "schema": "foo_schema",
+    "key": "*"
+  },
   "fields": {
     "Foo": {
       "type": "keyword",
       "size": 64,
-      "isKey": true
+      "key": 1
     },
     "Bar": {
       "type": "keyword",

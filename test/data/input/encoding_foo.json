@@ -1,16 +1,18 @@
 {
-  "model": "*",
-  "locus": "*",
-  "schema": "foo_schema",
-  "key": "*",
+  "smt": {
+    "model": "*",
+    "locus": "*",
+    "schema": "foo_schema",
+    "key": "*"
+  },
   "fields": {
     "Foo": {
       "name": "Foo",
       "type": "keyword",
       "size": 64,
       "default": null,
-      "isNullable": false,
-      "isKey": true,
+      "nullable": false,
+      "key": 1,
       "label": "Foo"
     },
     "Bar": {
@@ -18,8 +20,8 @@
       "type": "keyword",
       "size": 64,
       "default": null,
-      "isNullable": true,
-      "isKey": false,
+      "nullable": true,
+      
       "label": "Bar"
     },
     "Baz": {
@@ -27,8 +29,8 @@
       "type": "integer",
       "size": 0,
       "default": null,
-      "isNullable": true,
-      "isKey": false,
+      "nullable": true,
+      
       "label": "Baz"
     },
     "Fobe": {
@@ -36,8 +38,8 @@
       "type": "number",
       "size": 0,
       "default": null,
-      "isNullable": true,
-      "isKey": false,
+      "nullable": true,
+      
       "label": "Fobe"
     },
     "Dt Test": {
@@ -45,8 +47,8 @@
       "type": "date",
       "size": 0,
       "default": null,
-      "isNullable": true,
-      "isKey": false,
+      "nullable": true,
+      
       "label": "Dt Test"
     },
     "enabled": {
@@ -54,8 +56,8 @@
       "type": "boolean",
       "size": 0,
       "default": null,
-      "isNullable": true,
-      "isKey": false,
+      "nullable": true,
+      
       "label": "enabled"
     }
   }
