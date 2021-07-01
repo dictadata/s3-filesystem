@@ -1,4 +1,6 @@
-// filesystems/s3-filesystem
+/**
+ * dictadata/storage/filesystems/s3-filesystem
+ */
 "use strict";
 
 const { StorageFileSystem } = require("@dictadata/storage-junctions");
@@ -245,11 +247,11 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
     let resultCode = 0;
 
     try {
-      let src = options.Key;
+      let src = options.entry.Key;
 
       let smt = parseSMT(options.smt); // smt.locus is destination folder
       let folder = smt.locus.startsWith("file:") ? smt.locus.substr(5) : smt.locus;
-      let dest = path.join(folder, (options.keep_rpath ? options.rpath : options.name));
+      let dest = path.join(folder, (options.keep_rpath ? options.entry.rpath : options.entry.name));
       let dirname = path.dirname(dest);
       if (dirname !== this._dirname && !fs.existsSync(dirname)) {
         await fsp.mkdir(dirname, { recursive: true });
@@ -292,10 +294,10 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
     try {
       let smt = parseSMT(options.smt); // smt.locus is source folder
       let folder = smt.locus.startsWith("file:") ? smt.locus.substr(5) : smt.locus;
-      let src = path.join(folder, options.rpath);
+      let src = path.join(folder, options.entry.rpath);
 
       let [bucket, prefix] = this.splitLocus();
-      let dest = prefix + (options.useRPath ? options.rpath : options.name).split(path.sep).join(path.posix.sep);
+      let dest = prefix + (options.keep_rpath ? options.entry.rpath : options.entry.name).split(path.sep).join(path.posix.sep);
       logger.verbose("  " + src + " >> " + dest);
 
       // upload file
