@@ -7,19 +7,22 @@ const { StorageFileSystem } = require("@dictadata/storage-junctions");
 const { parseSMT, StorageResponse, StorageError } = require("@dictadata/storage-junctions/types");
 const { logger } = require("@dictadata/storage-junctions/utils");
 
-const AWS = require("aws-sdk");
-const { PassThrough } = require('stream');
 const fs = require('fs');
 const fsp = require('fs/promises');
 const path = require('path');
 const url = require('url');
 const zlib = require('zlib');
 
+const AWS = require("aws-sdk");
+const { PassThrough } = require('stream');
+
 module.exports = exports = class S3FileSystem extends StorageFileSystem {
 
   /**
-   *
-   * @param {*} options
+   * construct a S3FileSystem object
+   * @param {*} SMT storage memory trace
+   * @param {*} options filesystem options
+   * @param {string} options.s3.aws_profile name of AWS profile in ~/.aws/credentials
    */
   constructor(SMT, options) {
     super(SMT, options);
@@ -32,6 +35,9 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
     this._dirname = ''; // last local directory
   }
 
+  /**
+   * Initialize S3 credentials.
+   */
   async activate() {
     if (this.options.s3) {
       if (this.options.s3.aws_profile)
@@ -44,7 +50,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   }
 
   /**
-   * split locus into bucket name and optional path prefix
+   * split locus into S3 bucket name and optional path prefix
    */
   splitLocus() {
     //let s3path = this.smt.locus.substring(this._fstlen);  // remove "s3:"
@@ -66,7 +72,12 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   }
 
   /**
-   * list
+   * List files located in the folder specified in smt.locus.  smt.schema is a filename that may contain wildcard characters.
+   * @param {object} options Specify any options use when querying the filesystem.
+   * @param {string} options.schema Override smt.schema, my contain wildcard characters.
+   * @param {boolean} options.recursive Scan the specified folder and all sub-folders.
+   * @param {function} options.forEach Function to execute with each entry object, optional.
+   * @returns StorageResponse object where data is an array of directory entry objects.
    */
   async list(options) {
     logger.debug('s3-filesystem list');
@@ -134,6 +145,13 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
 
   }
 
+  /**
+   * Delete Object on the S3 filesystem.
+   * Depending upon the filesystem may be a delete, mark for deletion, erase, etc.
+   * @param {*} options Specify any options use when querying the filesystem.
+   * @param {*} options.schema Override smt.schema with a filename in the same locus.
+   * @returns StorageResponse object with resultCode.
+   */
   async dull(options) {
     logger.debug('s3-filesystem dull');
 
@@ -160,7 +178,10 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   }
 
   /**
-  * createReadStream
+   * Create an object mode readstream from the filesystem file.
+   * @param {*} options Specify any options use when querying the filesystem.
+   * @param {*} options.schema Override smt.schema with a filename in the same locus.
+   * @returns a node.js readstream based object if successful.
   */
   async createReadStream(options) {
     logger.debug("S3FileSystem createReadStream");
@@ -195,7 +216,11 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   }
 
   /**
-  * createWriteStream
+   * Create an object mode writestream to the filesystem file.
+   * @param {*} options Specify any options use when querying the filesystem.
+   * @param {*} options.schema Override smt.schema with filename at the same locus.
+   * @param {*} options.append Flag used indicate overwrite or append destination file. NOT IMPLEMENTED.
+   * @returns a node.js writestream based object if successful.
   */
   async createWriteStream(options) {
     logger.debug("S3FileSystem createWriteStream");
@@ -236,10 +261,12 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   }
 
   /**
-   * get file(s) from fs filesystem, save to local folder
-   * @param {Object} options 
-   * @param {string} options.smt the smt.locus provides the destination folder
-   * @returns 
+   * Download a file from S3 filesystem to local filesystem.
+   * @param {object} options Specify a directory entry with any option properties used when querying the filesystem.
+   * @param {object} options.entry Directory entry object containing the file information.
+   * @param {SMT} options.smt smt.locus specifies the output folder in the local filesystem.
+   * @param {boolean} options.keep_rpath If true replicate folder structure of remote filesystem in local filesystem.
+   * @returns StorageResponse object with resultCode;
    */
   async getFile(options) {
     logger.debug("s3-filesystem download");
@@ -281,10 +308,12 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   }
 
   /**
-   * read file(s) from local folder, copy to fs filesystem
-   * @param {Object} options 
-   * @param {string} options.smt smt.locus provides the source folder and smt.schema the filespec
-   * @returns 
+   * Upload a local file to the remote filesystem.
+   * @param {object} options Specify a directory entry with any option properties used when querying the filesystem.
+   * @param {SMT} options.smt smt.locus specifies the source folder in the local filesystem.
+   * @param {object} options.entry Directory entry object containing the file information.
+   * @param {boolean} options.keep_rpath If true replicate folder structure of local filesystem in remote filesystem.
+   * @returns StorageResponse object with resultCode.
    */
   async putFile(options) {
     logger.debug("s3-filesystem upload");
