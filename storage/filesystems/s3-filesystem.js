@@ -45,7 +45,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
     else
       this.options.s3 = {};
 
-    this._isActive = true;
+    this.isActive = true;
   }
 
   /**
@@ -53,7 +53,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
    */
   splitLocus() {
     //let s3path = this.smt.locus.substring(this._fstlen);  // remove "s3:"
-    let s3path = this._url.pathname;
+    let s3path = this.url.pathname;
     let bucket = s3path;
     let prefix = '';
 
@@ -231,7 +231,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
       var s3 = new AWS.S3(this.s3_options);
 
       ws = new PassThrough(); // app writes to passthrough and S3 reads from passthrough
-      this._isNewFile = true;  // can't append to S3 objects
+       = true;  // can't append to S3 objects
 
       let [bucket, prefix] = this.splitLocus();
       let s3params = {
@@ -330,7 +330,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
 
       // upload file
       let ws = fs.createReadStream(src);
-      this._isNewFile = true;  // can't append to S3 objects
+       = true;  // can't append to S3 objects
 
       var s3 = new AWS.S3(this.s3_options);
       let s3params = {
