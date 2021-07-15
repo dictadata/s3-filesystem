@@ -231,7 +231,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
       var s3 = new AWS.S3(this.s3_options);
 
       ws = new PassThrough(); // app writes to passthrough and S3 reads from passthrough
-       = true;  // can't append to S3 objects
+      this.isNewFile = true;  // can't append to S3 objects
 
       let [bucket, prefix] = this.splitLocus();
       let s3params = {
@@ -330,7 +330,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
 
       // upload file
       let ws = fs.createReadStream(src);
-       = true;  // can't append to S3 objects
+      this.isNewFile = true;  // can't append to S3 objects
 
       var s3 = new AWS.S3(this.s3_options);
       let s3params = {
