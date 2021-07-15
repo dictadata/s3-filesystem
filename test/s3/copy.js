@@ -5,14 +5,14 @@
 
 require("../register");
 const { logger } = require("@dictadata/storage-junctions/utils");
-const { getFile, putFile } = require('@dictadata/storage-junctions/test');
+const { getFiles, putFiles } = require('@dictadata/storage-junctions/test');
 
 logger.info("=== tests: S3 copy files");
 
 async function test_1() {
   logger.info("=== download files from S3 folder");
 
-  if (await getFile({
+  if (await getFiles({
     origin: {
       smt: "*|s3:dictadata.org/data/test/input/|*.json|*",
       options: {
@@ -28,7 +28,7 @@ async function test_1() {
 async function test_2() {
   logger.info("=== upload files to S3 folder");
 
-  if (await putFile({
+  if (await putFiles({
     origin: {
       smt: "*|./test/data/input/|*.json|*",
       options: {
@@ -45,7 +45,7 @@ async function test_2() {
 async function test_3() {
   logger.info("=== upload shape files");
 
-  if (await putFile({
+  if (await putFiles({
     origin: {
       smt: "*|/var/data/sos.iowa.gov/shapefiles/City Precincts/|*.*|*",
       options: {
@@ -64,7 +64,7 @@ async function test_3() {
 async function test_4() {
   logger.info("=== download shape files");
 
-  if (await getFile({
+  if (await getFiles({
     origin: {
       smt: "*|s3:dictadata.org/data/sos.iowa.gov/shapefiles/City Precincts/|*.*|*",
       options: {
