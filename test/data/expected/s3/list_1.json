@@ -1,48 +1,30 @@
 [
   {
-    "Key": "data/test/input/foo_encoding.json",
-    "ETag": "\"fda80639c7dc01f4416fef3201ee9571\"",
-    "StorageClass": "STANDARD",
-    "name": "foo_encoding.json",
-    "rpath": "foo_encoding.json",
-    "size": 1229,
-    "date": "2021-06-28T23:16:57.000Z"
-  },
-  {
-    "Key": "data/test/input/foo_encoding_2.json",
-    "ETag": "\"8a8dc56234b4fa54b6d19d72d8dfdd27\"",
-    "StorageClass": "STANDARD",
-    "name": "foo_encoding_2.json",
-    "rpath": "foo_encoding_2.json",
-    "size": 1968,
-    "date": "2021-06-28T23:16:57.000Z"
-  },
-  {
     "Key": "data/test/input/foofile.json",
-    "ETag": "\"d3a3fb8eb3e689aea55219d11dac9544\"",
+    "ETag": "\"26c70b42d4dc08007529ffd5d742e469\"",
     "StorageClass": "STANDARD",
     "name": "foofile.json",
     "rpath": "foofile.json",
-    "size": 1692,
-    "date": "2021-06-28T23:16:57.000Z"
+    "size": 1156,
+    "date": "2021-10-02T19:33:58.000Z"
   },
   {
     "Key": "data/test/input/foofile_01.json",
-    "ETag": "\"11c9a15830efe43c36a0f9982684236a\"",
+    "ETag": "\"81fe4d4eb58c17e6fe8301e7abb68f02\"",
     "StorageClass": "STANDARD",
     "name": "foofile_01.json",
     "rpath": "foofile_01.json",
-    "size": 1729,
-    "date": "2021-06-28T23:16:57.000Z"
+    "size": 2057,
+    "date": "2021-10-02T19:34:00.000Z"
   },
   {
     "Key": "data/test/input/foofile_02.json",
-    "ETag": "\"11c9a15830efe43c36a0f9982684236a\"",
+    "ETag": "\"c71a876836b7282e7c7670b052b4ce5e\"",
     "StorageClass": "STANDARD",
     "name": "foofile_02.json",
     "rpath": "foofile_02.json",
-    "size": 1729,
-    "date": "2021-06-28T23:16:57.000Z"
+    "size": 2599,
+    "date": "2021-10-02T19:34:00.000Z"
   },
   {
     "Key": "data/test/input/foofile_03.json",
@@ -52,5 +34,14 @@
     "rpath": "foofile_03.json",
     "size": 1729,
     "date": "2021-06-28T23:16:57.000Z"
+  },
+  {
+    "Key": "data/test/input/foofile_two.json",
+    "ETag": "\"40dbad7b4f88eb1c8ab10728cbc3a885\"",
+    "StorageClass": "STANDARD",
+    "name": "foofile_two.json",
+    "rpath": "foofile_two.json",
+    "size": 452,
+    "date": "2021-10-02T19:34:01.000Z"
   }
 ]

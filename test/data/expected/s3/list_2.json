@@ -1,29 +1,83 @@
 [
   {
-    "Key": "data/test/input/foofile_01.json",
-    "ETag": "\"11c9a15830efe43c36a0f9982684236a\"",
+    "Key": "data/test/input/foo_schema.encoding.json",
+    "ETag": "\"c537b7d5479a7a907c2fa8246020c71b\"",
     "StorageClass": "STANDARD",
-    "name": "foofile_01.json",
-    "rpath": "foofile_01.json",
-    "size": 1729,
-    "date": "2021-06-28T23:16:57.000Z"
+    "name": "foo_schema.encoding.json",
+    "rpath": "foo_schema.encoding.json",
+    "size": 1163,
+    "date": "2021-10-02T19:33:52.000Z"
   },
   {
-    "Key": "data/test/input/foofile_02.json",
-    "ETag": "\"11c9a15830efe43c36a0f9982684236a\"",
+    "Key": "data/test/input/foo_schema_01.encoding.json",
+    "ETag": "\"fb2fcf4c672711c3a011a7953632e004\"",
     "StorageClass": "STANDARD",
-    "name": "foofile_02.json",
-    "rpath": "foofile_02.json",
-    "size": 1729,
-    "date": "2021-06-28T23:16:57.000Z"
+    "name": "foo_schema_01.encoding.json",
+    "rpath": "foo_schema_01.encoding.json",
+    "size": 2655,
+    "date": "2021-10-02T19:33:53.000Z"
   },
   {
-    "Key": "data/test/input/foofile_03.json",
-    "ETag": "\"11c9a15830efe43c36a0f9982684236a\"",
+    "Key": "data/test/input/foo_schema_02.encoding.json",
+    "ETag": "\"696e0261a2c2730fe2b4465642ae0612\"",
     "StorageClass": "STANDARD",
-    "name": "foofile_03.json",
-    "rpath": "foofile_03.json",
-    "size": 1729,
-    "date": "2021-06-28T23:16:57.000Z"
+    "name": "foo_schema_02.encoding.json",
+    "rpath": "foo_schema_02.encoding.json",
+    "size": 1692,
+    "date": "2021-10-02T19:33:53.000Z"
+  },
+  {
+    "Key": "data/test/input/foo_schema_lg.encoding.json",
+    "ETag": "\"b9b25caae6fc137f301c1cd930a0e205\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_lg.encoding.json",
+    "rpath": "foo_schema_lg.encoding.json",
+    "size": 1173,
+    "date": "2021-10-02T19:33:54.000Z"
+  },
+  {
+    "Key": "data/test/input/foo_schema_short.encoding.json",
+    "ETag": "\"43eebf4b83cb46567e3cf9013beb8fcd\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_short.encoding.json",
+    "rpath": "foo_schema_short.encoding.json",
+    "size": 468,
+    "date": "2021-10-02T19:33:54.000Z"
+  },
+  {
+    "Key": "data/test/input/foo_schema_t.encoding.json",
+    "ETag": "\"c3b198f6bd4f93a4c2d34ecde01eea56\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_t.encoding.json",
+    "rpath": "foo_schema_t.encoding.json",
+    "size": 1212,
+    "date": "2021-10-02T19:33:55.000Z"
+  },
+  {
+    "Key": "data/test/input/foo_schema_two.encoding.json",
+    "ETag": "\"67e7fb41de92ba48212a5f648f1d6541\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_two.encoding.json",
+    "rpath": "foo_schema_two.encoding.json",
+    "size": 485,
+    "date": "2021-10-02T19:33:55.000Z"
+  },
+  {
+    "Key": "data/test/input/foo_schema_typesonly.encoding.json",
+    "ETag": "\"d7c43ca87ad078146a5ce430ba6a9224\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_typesonly.encoding.json",
+    "rpath": "foo_schema_typesonly.encoding.json",
+    "size": 180,
+    "date": "2021-10-02T19:33:56.000Z"
+  },
+  {
+    "Key": "data/test/input/foo_transform.encoding.json",
+    "ETag": "\"ef07fbbba1ababa3e378e63cb15a354a\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_transform.encoding.json",
+    "rpath": "foo_transform.encoding.json",
+    "size": 278,
+    "date": "2021-10-02T19:33:57.000Z"
   }
 ]
