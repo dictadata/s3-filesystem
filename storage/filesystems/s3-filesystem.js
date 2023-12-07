@@ -122,7 +122,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
 
           if (rx.test(entry.Key)) {
             entry.name = path.basename(entry.Key);
-            entry.rpath = entry.Key.substring(prefix.length);
+            entry.rpath = entry.Key;  // entry.Key.substring(prefix.length);
             Object.defineProperty(entry, 'size', Object.getOwnPropertyDescriptor(entry, 'Size'));
             Object.defineProperty(entry, 'date', Object.getOwnPropertyDescriptor(entry, 'LastModified'));
             delete entry['Size'];
@@ -241,7 +241,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
       };
 
       ws.fs_ws_promise = s3.upload(s3params).promise();
-      // ws.fs_ws_promise is an added property. Used so that StorageWriters 
+      // ws.fs_ws_promise is an added property. Used so that StorageWriters
       // using filesystems know when a transfer is complete.
 
       ///// check for zip
