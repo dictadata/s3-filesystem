@@ -23,13 +23,13 @@ storage.FileSystems.use("s3", S3FileSystem);
 Example SMT string for accessing json files in an S3 bucket.
 
 ```javascript
-let smt = "json|s3:dictadata.net/data/|foofile.json|*"
+let smt = "json|s3:dictadata/test/data/|foofile.json|*"
 ```
 
 Where:
 
 - "json" - ***smt model*** of junction used to encode and query data in the storage source.
-- "s3:dictadata.net/data/" - ***smt locus*** locator address for the storage source.
+- "s3:dictadata/test/data/" - ***smt locus*** locator address for the storage source.
   - "S3" - ***filesystem model*** used to access data containers in the storage source.
   - "dictadata.org" - *S3 bucket* name.
   - "/data/" - *S3 prefix* for object names.

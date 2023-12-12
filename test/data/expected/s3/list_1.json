@@ -1,6 +1,6 @@
 [
   {
-    "Key": "data/test/input/foofile.json",
+    "Key": "test/data/input/foofile.json",
     "ETag": "\"26c70b42d4dc08007529ffd5d742e469\"",
     "StorageClass": "STANDARD",
     "name": "foofile.json",
@@ -9,7 +9,7 @@
     "date": "2021-10-02T19:33:58.000Z"
   },
   {
-    "Key": "data/test/input/foofile_01.json",
+    "Key": "test/data/input/foofile_01.json",
     "ETag": "\"81fe4d4eb58c17e6fe8301e7abb68f02\"",
     "StorageClass": "STANDARD",
     "name": "foofile_01.json",
@@ -18,7 +18,7 @@
     "date": "2021-10-02T19:34:00.000Z"
   },
   {
-    "Key": "data/test/input/foofile_02.json",
+    "Key": "test/data/input/foofile_02.json",
     "ETag": "\"c71a876836b7282e7c7670b052b4ce5e\"",
     "StorageClass": "STANDARD",
     "name": "foofile_02.json",
@@ -27,7 +27,7 @@
     "date": "2021-10-02T19:34:00.000Z"
   },
   {
-    "Key": "data/test/input/foofile_03.json",
+    "Key": "test/data/input/foofile_03.json",
     "ETag": "\"11c9a15830efe43c36a0f9982684236a\"",
     "StorageClass": "STANDARD",
     "name": "foofile_03.json",
@@ -36,7 +36,7 @@
     "date": "2021-06-28T23:16:57.000Z"
   },
   {
-    "Key": "data/test/input/foofile_two.json",
+    "Key": "test/data/input/foofile_two.json",
     "ETag": "\"40dbad7b4f88eb1c8ab10728cbc3a885\"",
     "StorageClass": "STANDARD",
     "name": "foofile_two.json",

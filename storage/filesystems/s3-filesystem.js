@@ -122,13 +122,13 @@ class S3FileSystem extends StorageFileSystem {
           if (entry.Key.charAt(entry.Key.length - 1) === '/')
             continue;  // skip folder names
           if (prefix && entry.Key.indexOf(prefix) !== 0)
-            continue;
+            continue;  // prefix doesn't match
           if (!options.recursive && entry.Key.indexOf('/', prefix.length) >= 0)
-            continue;  // no recursion, but controls processing longer paths (subfolders)
+            continue;  // don't processing longer paths (subfolders)
 
           if (rx.test(entry.Key)) {
             entry.name = path.basename(entry.Key);
-            entry.rpath = entry.Key;  // entry.Key.substring(prefix.length);
+            entry.rpath = entry.Key.substring(prefix.length);
             Object.defineProperty(entry, 'size', Object.getOwnPropertyDescriptor(entry, 'Size'));
             Object.defineProperty(entry, 'date', Object.getOwnPropertyDescriptor(entry, 'LastModified'));
             delete entry['Size'];

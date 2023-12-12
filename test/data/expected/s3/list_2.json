@@ -1,0 +1,83 @@
+[
+  {
+    "Key": "test/data/input/encodings/foo_schema.encoding.json",
+    "ETag": "\"c537b7d5479a7a907c2fa8246020c71b\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema.encoding.json",
+    "rpath": "encodings/foo_schema.encoding.json",
+    "size": 1163,
+    "date": "2023-12-12T23:22:26.000Z"
+  },
+  {
+    "Key": "test/data/input/encodings/foo_schema_01.encoding.json",
+    "ETag": "\"fb2fcf4c672711c3a011a7953632e004\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_01.encoding.json",
+    "rpath": "encodings/foo_schema_01.encoding.json",
+    "size": 2655,
+    "date": "2023-12-12T23:22:26.000Z"
+  },
+  {
+    "Key": "test/data/input/encodings/foo_schema_02.encoding.json",
+    "ETag": "\"696e0261a2c2730fe2b4465642ae0612\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_02.encoding.json",
+    "rpath": "encodings/foo_schema_02.encoding.json",
+    "size": 1692,
+    "date": "2023-12-12T23:22:26.000Z"
+  },
+  {
+    "Key": "test/data/input/encodings/foo_schema_lg.encoding.json",
+    "ETag": "\"b9b25caae6fc137f301c1cd930a0e205\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_lg.encoding.json",
+    "rpath": "encodings/foo_schema_lg.encoding.json",
+    "size": 1173,
+    "date": "2023-12-12T23:22:26.000Z"
+  },
+  {
+    "Key": "test/data/input/encodings/foo_schema_short.encoding.json",
+    "ETag": "\"43eebf4b83cb46567e3cf9013beb8fcd\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_short.encoding.json",
+    "rpath": "encodings/foo_schema_short.encoding.json",
+    "size": 468,
+    "date": "2023-12-12T23:22:26.000Z"
+  },
+  {
+    "Key": "test/data/input/encodings/foo_schema_t.encoding.json",
+    "ETag": "\"c3b198f6bd4f93a4c2d34ecde01eea56\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_t.encoding.json",
+    "rpath": "encodings/foo_schema_t.encoding.json",
+    "size": 1212,
+    "date": "2023-12-12T23:22:26.000Z"
+  },
+  {
+    "Key": "test/data/input/encodings/foo_schema_two.encoding.json",
+    "ETag": "\"67e7fb41de92ba48212a5f648f1d6541\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_two.encoding.json",
+    "rpath": "encodings/foo_schema_two.encoding.json",
+    "size": 485,
+    "date": "2023-12-12T23:22:26.000Z"
+  },
+  {
+    "Key": "test/data/input/encodings/foo_schema_typesonly.encoding.json",
+    "ETag": "\"d7c43ca87ad078146a5ce430ba6a9224\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_schema_typesonly.encoding.json",
+    "rpath": "encodings/foo_schema_typesonly.encoding.json",
+    "size": 180,
+    "date": "2023-12-12T23:22:26.000Z"
+  },
+  {
+    "Key": "test/data/input/encodings/foo_transform.encoding.json",
+    "ETag": "\"ef07fbbba1ababa3e378e63cb15a354a\"",
+    "StorageClass": "STANDARD",
+    "name": "foo_transform.encoding.json",
+    "rpath": "encodings/foo_transform.encoding.json",
+    "size": 278,
+    "date": "2023-12-12T23:22:26.000Z"
+  }
+]

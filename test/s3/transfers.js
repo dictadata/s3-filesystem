@@ -14,18 +14,18 @@ async function s3Destination() {
 
   logger.verbose('=== s3: csv_output.csv');
   if (await dullSchema({
-    smt: "csv|s3:dictadata.net/data/test/output/csv/|output.csv|*"
+    smt: "csv|s3:dictadata/test/output/csv/|output.csv|*"
   })) return 1;
 
   if (await transfer({
     origin: {
-      smt: "csv|./data/input/|foofile.csv.gz|*",
+      smt: "csv|./test/data/input/|foofile.csv.gz|*",
       options: {
         header: true
       }
     },
     terminal: {
-      smt: "csv|s3:dictadata.net/data/test/output/csv/|output.csv|*",
+      smt: "csv|s3:dictadata/test/output/csv/|output.csv|*",
       options: {
         header: true,
         "s3": {
@@ -38,13 +38,13 @@ async function s3Destination() {
   logger.verbose('=== s3: csv_output.csv.gz');
   if (await transfer({
     origin: {
-      smt: "csv|./data/input/|foofile.csv|*",
+      smt: "csv|./test/data/input/|foofile.csv|*",
       options: {
         header: true
       }
     },
     terminal: {
-      smt: "csv|s3:dictadata.net/data/test/output/csv/|output.csv.gz|*",
+      smt: "csv|s3:dictadata/test/output/csv/|output.csv.gz|*",
       options: {
         header: true,
         "s3": {
@@ -57,10 +57,10 @@ async function s3Destination() {
   logger.verbose('=== s3: json_output.json');
   if (await transfer({
     origin: {
-      smt: "json|./data/input/|foofile.json.gz|*"
+      smt: "json|./test/data/input/|foofile.json.gz|*"
     },
     terminal: {
-      smt: "json|s3:dictadata.net/data/test/output/json/|output.json|*",
+      smt: "json|s3:dictadata/test/output/json/|output.json|*",
       options: {
         "s3": {
           "aws_profile": ""
@@ -72,10 +72,10 @@ async function s3Destination() {
   logger.verbose('=== s3: json_output.json.gz');
   if (await transfer({
     origin: {
-      smt: "json|./data/input/|foofile.json|*"
+      smt: "json|./test/data/input/|foofile.json|*"
     },
     terminal: {
-      smt: "json|s3:dictadata.net/data/test/output/json/|output.json.gz|*",
+      smt: "json|s3:dictadata/test/output/json/|output.json.gz|*",
       options: {
         "s3": {
           "aws_profile": ""
@@ -92,7 +92,7 @@ async function s3Source() {
   logger.verbose('=== s3_output.csv');
   if (await transfer({
     origin: {
-      smt: "csv|s3:dictadata.net/data/test/input/|foofile.csv.gz|*",
+      smt: "csv|s3:dictadata/test/data/input/|foofile.csv.gz|*",
       options: {
         header: true,
         "s3": {
@@ -101,7 +101,7 @@ async function s3Source() {
       }
     },
     terminal: {
-      smt: "csv|./data/output/s3/|output.csv|*",
+      smt: "csv|./test/data/output/s3/|output.csv|*",
       options: {
         header: true
       }
@@ -111,7 +111,7 @@ async function s3Source() {
   logger.verbose('=== s3_output.csv.gz');
   if (await transfer({
     origin: {
-      smt: "csv|s3:dictadata.net/data/test/input/|foofile.csv|*",
+      smt: "csv|s3:dictadata/test/data/input/|foofile.csv|*",
       options: {
         header: true,
         "s3": {
@@ -120,7 +120,7 @@ async function s3Source() {
       }
     },
     terminal: {
-      smt: "csv|./data/output/s3/|output.csv.gz|*",
+      smt: "csv|./test/data/output/s3/|output.csv.gz|*",
       options: {
         header: true
       }
@@ -130,7 +130,7 @@ async function s3Source() {
   logger.verbose('=== s3_output.json');
   if (await transfer({
     origin: {
-      smt: "json|s3:dictadata.net/data/test/input/|foofile.json.gz|*",
+      smt: "json|s3:dictadata/test/data/input/|foofile.json.gz|*",
       options: {
         "s3": {
           "aws_profile": ""
@@ -138,14 +138,14 @@ async function s3Source() {
       }
     },
     terminal: {
-      smt: "json|./data/output/s3/|output.json|*"
+      smt: "json|./test/data/output/s3/|output.json|*"
     }
   })) return 1;
 
   logger.verbose('=== s3_output.json.gz');
   if (await transfer({
     origin: {
-      smt: "json|s3:dictadata.net/data/test/input/|foofile.json|*",
+      smt: "json|s3:dictadata/test/data/input/|foofile.json|*",
       options: {
         "s3": {
           "aws_profile": ""
@@ -153,7 +153,7 @@ async function s3Source() {
       }
     },
     terminal: {
-      smt: "json|./data/output/s3/|output.json.gz|*"
+      smt: "json|./test/data/output/s3/|output.json.gz|*"
     }
   })) return 1;
 

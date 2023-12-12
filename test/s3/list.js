@@ -15,7 +15,7 @@ async function tests() {
   logger.info("=== list S3 bucket (forEach)");
   if(await list({
     origin: {
-      smt: "json|s3:dictadata.net/data/test/input/|foofile*.json|*",
+      smt: "json|s3:dictadata/test/data/input/|foofile*.json|*",
       options: {
         recursive: false,
         forEach: (entry) => {
@@ -24,16 +24,16 @@ async function tests() {
       }
     },
     terminal: {
-      output: "./data/output/s3/list_1.json"
+      output: "./test/data/output/s3/list_1.json"
     }
-  })) return 1;
+  }, 2)) return 1;
 
   logger.info("=== list S3 bucket (recursive)");
   if (await list({
     origin: {
       smt: {
         model: "json",
-        locus: "s3:dictadata.net/data/test/input/",
+        locus: "s3:dictadata/test/data/input/",
         schema: "*.json",
         key: "*"
       },
@@ -46,9 +46,9 @@ async function tests() {
       }
     },
     terminal: {
-      output: "./data/output/s3/list_2.json"
+      output: "./test/data/output/s3/list_2.json"
     }
-  })) return 1;
+  }, 2)) return 1;
 
 }
 

@@ -14,13 +14,13 @@ async function test_1() {
 
   if (await getFiles({
     origin: {
-      smt: "*|s3:dictadata.net/data/test/input/|*.json|*",
+      smt: "*|s3:dictadata/test/data/input/|*.json|*",
       options: {
         recursive: false
       }
     },
     terminal: {
-      smt: "*|./data/output/s3/downloads/|*|*"
+      smt: "*|./test/data/output/s3/downloads/|*|*"
     }
   })) return 1;
 }
@@ -30,13 +30,13 @@ async function test_2() {
 
   if (await putFiles({
     origin: {
-      smt: "*|./data/input/|*.json|*",
+      smt: "*|./test/data/input/|*.json|*",
       options: {
         recursive: false
       }
     },
     terminal: {
-      smt: "*|s3:dictadata.net/data/test/output/uploads/|*|*",
+      smt: "*|s3:dictadata/test/output/uploads/|*|*",
       options: {}
     }
   })) return 1;
@@ -47,13 +47,13 @@ async function test_3() {
 
   if (await putFiles({
     origin: {
-      smt: "*|/var/data/US/IA/sos.iowa.gov/shapefiles/City Precincts/|*.*|*",
+      smt: "*|/var/dictadata/US/IA/sos.iowa.gov/shapefiles/City Precincts/|A*.*|*",
       options: {
         recursive: true
       }
     },
     terminal: {
-      smt: "*|s3:dictadata.net/data/US/IA/sos.iowa.gov/shapefiles/City Precincts/|*|*",
+      smt: "*|s3:dictadata/US/IA/sos.iowa.gov/shapefiles/City Precincts/|*|*",
       options: {
         useRPath: true
       }
@@ -66,13 +66,13 @@ async function test_4() {
 
   if (await getFiles({
     origin: {
-      smt: "*|s3:dictadata.net/data/US/IA/sos.iowa.gov/shapefiles/City Precincts/|*.*|*",
+      smt: "*|s3:dictadata/US/IA/sos.iowa.gov/shapefiles/City Precincts/|A*.*|*",
       options: {
         recursive: true
       }
     },
     terminal: {
-      smt: "*|./data/output/s3/shapefiles/|*|*",
+      smt: "*|./test/data/output/s3/shapefiles/|*|*",
       options: {
         useRPath: true
       }
