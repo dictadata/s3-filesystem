@@ -1,12 +1,21 @@
 {
+  "domain": "foo",
+  "name": "foo_schema",
+  "type": "engram",
+  "title": "foo_schema encoding",
+  "description": "test input for foo_schema encoding",
+  "source": "file:./data/input/encodings/foo_schema.encoding.json",
+  "tags": [
+    "foo"
+  ],
   "smt": {
     "model": "*",
     "locus": "*",
-    "schema": "foo_schema_lg",
+    "schema": "foo_schema",
     "key": "*"
   },
-  "fields": {
-    "Foo": {
+  "fields": [
+    {
       "name": "Foo",
       "type": "keyword",
       "size": 64,
@@ -15,50 +24,45 @@
       "key": 1,
       "label": "Foo"
     },
-    "Bar": {
+    {
       "name": "Bar",
-      "type": "keyword",
+      "type": "text",
       "size": 256,
       "default": null,
       "nullable": true,
-      
       "label": "Bar"
     },
-    "Baz": {
+    {
       "name": "Baz",
-      "type": "text",
-      "size": 20,
+      "type": "integer",
+      "size": 0,
       "default": null,
       "nullable": true,
-      
       "label": "Baz"
     },
-    "Fobe": {
+    {
       "name": "Fobe",
-      "type": "text",
-      "size": 1200,
+      "type": "number",
+      "size": 0,
       "default": null,
       "nullable": true,
-      
       "label": "Fobe"
     },
-    "Dt Test": {
-      "name": "Str Test",
-      "type": "text",
-      "size": 2500,
+    {
+      "name": "Dt Test",
+      "type": "date",
+      "size": 0,
       "default": null,
       "nullable": true,
-      
-      "label": "Str Test"
+      "label": "Dt Test"
     },
-    "enabled": {
-      "name": "enabler",
-      "type": "text",
-      "size": 200000,
+    {
+      "name": "enabled",
+      "type": "boolean",
+      "size": 0,
       "default": null,
       "nullable": true,
-      
-      "label": "enabler"
+      "label": "enabled"
     }
-  }
+  ]
 }

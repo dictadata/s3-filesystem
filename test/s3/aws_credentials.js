@@ -1,15 +1,33 @@
 // test/s3/aws_credentials
 
-var AWS = require("aws-sdk");
+// AWS SDK V3
+const { fromNodeProviderChain, fromIni } = require("@aws-sdk/credential-providers");
+const { loadSharedConfigFiles } = require('@aws-sdk/shared-ini-file-loader');
+const { S3Client } = require('@aws-sdk/client-s3');
 
-AWS.config.getCredentials(function (err) {
-  if (err) console.log(err.stack);
-  // credentials not loaded
-  else {
-    console.log("Access key:", AWS.config.credentials.accessKeyId);
-    console.log("Secret access key:", AWS.config.credentials.secretAccessKey);
+(async () => {
+
+  console.log("from .aws config files:");
+  {
+    let config = await loadSharedConfigFiles();
+    console.log(JSON.stringify(config.configFile[ "default" ], null, 2));
+
+    let profile = "dictadata";
+    let credentials = await fromNodeProviderChain({ profile: profile })();
+    console.log(JSON.stringify(credentials, null, 2));
   }
-});
 
-AWS.config.update({ region: 'us-east-1' });
-console.log("Region: ", AWS.config.region);
+  console.log("from S3 client connection:");
+  {
+    let client = new S3Client();
+
+    let results = {
+      region: await client.config.region()
+    };
+    console.log(JSON.stringify(results,null,2));
+
+    let credentials = await client.config.credentials();
+    results = JSON.stringify(await credentials, null, 2)
+    console.log(results);
+  }
+})();

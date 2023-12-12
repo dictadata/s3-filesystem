@@ -3,19 +3,23 @@
  */
 "use strict";
 
+const Storage = require("@dictadata/storage-junctions");
 const { StorageFileSystem } = require("@dictadata/storage-junctions");
-const { parseSMT, StorageResponse, StorageError } = require("@dictadata/storage-junctions/types");
+const { SMT, StorageResults, StorageError } = require("@dictadata/storage-junctions/types");
 const { logger } = require("@dictadata/storage-junctions/utils");
 
 const fs = require('fs');
 const fsp = require('fs/promises');
 const path = require('path');
 const zlib = require('zlib');
-
-const AWS = require("aws-sdk");
 const { PassThrough } = require('stream');
 
-module.exports = exports = class S3FileSystem extends StorageFileSystem {
+const { S3Client, ListObjectsV2Command, GetObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
+const { Upload } = require("@aws-sdk/lib-storage")
+const { fromNodeProviderChain } = require("@aws-sdk/credential-providers");
+
+
+class S3FileSystem extends StorageFileSystem {
 
   /**
    * construct a S3FileSystem object
@@ -40,7 +44,8 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   async activate() {
     if (this.options.s3) {
       if (this.options.s3.aws_profile)
-        this.s3_options.credentials = new AWS.SharedIniFileCredentials({ profile: this.options.s3.aws_profile });
+        //this.s3_options.credentials = new AWS.SharedIniFileCredentials({ profile: this.options.s3.aws_profile });
+        this.s3_options.credentials = await fromNodeProviderChain({ profile: this.options.s3.aws_profile })();
     }
     else
       this.options.s3 = {};
@@ -76,17 +81,17 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
    * @param {string} options.schema Override smt.schema, my contain wildcard characters.
    * @param {boolean} options.recursive Scan the specified folder and all sub-folders.
    * @param {function} options.forEach Function to execute with each entry object, optional.
-   * @returns StorageResponse object where data is an array of directory entry objects.
+   * @returns StorageResults object where data is an array of directory entry objects.
    */
   async list(options) {
     logger.debug('s3-filesystem list');
 
     options = Object.assign({}, this.options, options);
-    let schema = options.schema || this.smt.schema;
+    let schema = options?.schema || options?.name || this.smt.schema;
     let list = [];
 
     try {
-      var s3 = new AWS.S3(this.s3_options);
+      var s3 = new S3Client(this.s3_options);
 
       let [bucket, prefix] = this.splitLocus();
       let s3params = {
@@ -106,7 +111,8 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
       while (!done) {
         if (lastKey)
           s3params['StartAfter'] = lastKey;
-        let data = await s3.listObjectsV2(s3params).promise();
+        const command = new ListObjectsV2Command(s3params);
+        const data = await s3.send(command);
         if (data.Contents.length === 0 || data.Contents.length < s3params.MaxKeys)
           done = true;
         else
@@ -135,7 +141,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
           }
         }
       }
-      return new StorageResponse(0, null, list);
+      return new StorageResults(0, null, list);
     }
     catch (err) {
       logger.error(err);
@@ -149,16 +155,16 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
    * Depending upon the filesystem may be a delete, mark for deletion, erase, etc.
    * @param {*} options Specify any options use when querying the filesystem.
    * @param {*} options.schema Override smt.schema with a filename in the same locus.
-   * @returns StorageResponse object with resultCode.
+   * @returns StorageResults object with resultCode.
    */
   async dull(options) {
     logger.debug('s3-filesystem dull');
 
     options = Object.assign({}, this.options, options);
-    let schema = options.schema || this.smt.schema;
+    let schema = options?.schema || options?.name || this.smt.schema;
 
     try {
-      var s3 = new AWS.S3(this.s3_options);
+      var s3 = new S3Client(this.s3_options);
 
       let [bucket, prefix] = this.splitLocus();
       let s3params = {
@@ -166,9 +172,10 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
         Key: prefix + schema
       };
 
-      let rs = await s3.deleteObject(s3params);
+      let command = new DeleteObjectCommand(s3params);
+      let rs = await s3.send(command);
 
-      return new StorageResponse(0);
+      return new StorageResults(0);
     }
     catch (err) {
       logger.error(err);
@@ -185,11 +192,11 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   async createReadStream(options) {
     logger.debug("S3FileSystem createReadStream");
     options = Object.assign({}, this.options, options);
-    let schema = options.schema || this.smt.schema;
+    let schema = options?.schema || options?.name || this.smt.schema;
     let rs = null;
 
     try {
-      var s3 = new AWS.S3(this.s3_options);
+      var s3 = new S3Client(this.s3_options);
 
       let [bucket, prefix] = this.splitLocus();
       let s3params = {
@@ -197,7 +204,9 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
         Key: prefix + schema
       };
 
-      rs = await s3.getObject(s3params).createReadStream();
+      let command = new GetObjectCommand(s3params);
+      let response = await s3.send(command);
+      rs = response.Body;
 
       ///// check for zip
       if (s3params.Key.endsWith('.gz')) {
@@ -224,11 +233,11 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   async createWriteStream(options) {
     logger.debug("S3FileSystem createWriteStream");
     options = Object.assign({}, this.options, options);
-    let schema = options.schema || this.smt.schema;
+    let schema = options?.schema || options?.name || this.smt.schema;
     let ws = null;
 
     try {
-      var s3 = new AWS.S3(this.s3_options);
+      var s3 = new S3Client(this.s3_options);
 
       ws = new PassThrough(); // app writes to passthrough and S3 reads from passthrough
       this.isNewFile = true;  // can't append to S3 objects
@@ -240,7 +249,8 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
         Body: ws
       };
 
-      ws.fs_ws_promise = s3.upload(s3params).promise();
+      let upload = new Upload({ client: s3, params: s3params });
+      ws.fs_ws_promise = upload.done();
       // ws.fs_ws_promise is an added property. Used so that StorageWriters
       // using filesystems know when a transfer is complete.
 
@@ -265,7 +275,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
    * @param {object} options.entry Directory entry object containing the file information.
    * @param {SMT} options.smt smt.locus specifies the output folder in the local filesystem.
    * @param {boolean} options.keep_rpath If true replicate folder structure of remote filesystem in local filesystem.
-   * @returns StorageResponse object with resultCode;
+   * @returns StorageResults object with resultCode;
    */
   async getFile(options) {
     logger.debug("s3-filesystem download");
@@ -275,7 +285,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
     try {
       let src = options.entry.Key;
 
-      let smt = parseSMT(options.smt); // smt.locus is destination folder
+      let smt = new SMT(options.smt); // smt.locus is destination folder
       let folder = smt.locus.startsWith("file:") ? smt.locus.substr(5) : smt.locus;
       let dest = path.join(folder, (options.keep_rpath ? options.entry.rpath : options.entry.name));
       let dirname = path.dirname(dest);
@@ -285,7 +295,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
       }
       logger.verbose("  " + src + " >> " + dest);
 
-      var s3 = new AWS.S3(this.s3_options);
+      var s3 = new S3Client(this.s3_options);
 
       let [bucket, prefix] = this.splitLocus();
       let s3params = {
@@ -293,12 +303,14 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
         Key: src
       };
 
-      let rs = await s3.getObject(s3params).createReadStream();
+      let command = new GetObjectCommand(s3params);
+      let response = await s3.send(command)
+      let rs = response.Body;
 
       // save to local file
       rs.pipe(fs.createWriteStream(dest));
 
-      return new StorageResponse(resultCode);
+      return new StorageResults(resultCode);
     }
     catch (err) {
       logger.error(err);
@@ -312,7 +324,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
    * @param {SMT} options.smt smt.locus specifies the source folder in the local filesystem.
    * @param {object} options.entry Directory entry object containing the file information.
    * @param {boolean} options.keep_rpath If true replicate folder structure of local filesystem in remote filesystem.
-   * @returns StorageResponse object with resultCode.
+   * @returns StorageResults object with resultCode.
    */
   async putFile(options) {
     logger.debug("s3-filesystem upload");
@@ -320,7 +332,7 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
     let resultCode = 0;
 
     try {
-      let smt = parseSMT(options.smt); // smt.locus is source folder
+      let smt = new SMT(options.smt); // smt.locus is source folder
       let folder = smt.locus.startsWith("file:") ? smt.locus.substr(5) : smt.locus;
       let src = path.join(folder, options.entry.rpath);
 
@@ -332,16 +344,17 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
       let ws = fs.createReadStream(src);
       this.isNewFile = true;  // can't append to S3 objects
 
-      var s3 = new AWS.S3(this.s3_options);
+      var s3 = new S3Client(this.s3_options);
       let s3params = {
         Bucket: bucket,
         Key: dest,
         Body: ws
       };
 
-      await s3.upload(s3params).promise();
+      let upload = new Upload({ client: s3, params: s3params });
+      await upload.done();
 
-      return new StorageResponse(resultCode);
+      return new StorageResults(resultCode);
     }
     catch (err) {
       logger.error(err);
@@ -350,3 +363,6 @@ module.exports = exports = class S3FileSystem extends StorageFileSystem {
   }
 
 };
+
+module.exports = exports = S3FileSystem;
+Storage.FileSystems.use('S3', S3FileSystem);

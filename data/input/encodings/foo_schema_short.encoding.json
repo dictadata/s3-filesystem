@@ -2,7 +2,7 @@
   "smt": {
     "model": "*",
     "locus": "*",
-    "schema": "foo_schema",
+    "schema": "foo_schema_short",
     "key": "*"
   },
   "fields": {
@@ -12,8 +12,8 @@
       "key": 1
     },
     "Bar": {
-      "type": "keyword",
-      "size": 64
+      "type": "text",
+      "size": 256
     },
     "Baz": {
       "type": "integer"

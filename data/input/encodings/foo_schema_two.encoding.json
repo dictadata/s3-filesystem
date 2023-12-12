@@ -5,8 +5,8 @@
     "schema": "foo_schema_two",
     "key": "*"
   },
-  "fields": {
-    "Foo": {
+  "fields": [
+    {
       "name": "Foo",
       "type": "keyword",
       "size": 64,
@@ -15,14 +15,14 @@
       "key": 1,
       "label": "Foo"
     },
-    "Bar": {
+    {
       "name": "Bar",
-      "type": "keyword",
-      "size": 64,
+      "type": "text",
+      "size": 256,
       "default": null,
       "nullable": true,
       "key": 2,
       "label": "Bar"
     }
-  }
+  ]
 }

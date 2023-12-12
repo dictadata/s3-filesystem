@@ -1,9 +1,18 @@
 {
+  "name": "foo_schema_lg",
+  "type": "engram",
+  "title": "foo_schema encoding large",
+  "description": "Test input for foo_schema_lg encoding with large text field.",
+  "source": "file:./data/input/encodings/foo_schema_lg.encoding.json",
+  "notes": "This is where a user could add their notes about the data source.",
+  "tags": [
+    "foo"
+  ],
   "smt": {
     "model": "*",
     "locus": "*",
-    "schema": "foo_schema",
-    "key": "*"
+    "schema": "foo_schema_lg",
+    "key": "=Foo"
   },
   "fields": {
     "Foo": {
@@ -17,11 +26,10 @@
     },
     "Bar": {
       "name": "Bar",
-      "type": "keyword",
-      "size": 64,
+      "type": "text",
+      "size": 256,
       "default": null,
       "nullable": true,
-      
       "label": "Bar"
     },
     "Baz": {
@@ -30,7 +38,6 @@
       "size": 0,
       "default": null,
       "nullable": true,
-      
       "label": "Baz"
     },
     "Fobe": {
@@ -39,7 +46,6 @@
       "size": 0,
       "default": null,
       "nullable": true,
-      
       "label": "Fobe"
     },
     "Dt Test": {
@@ -48,7 +54,6 @@
       "size": 0,
       "default": null,
       "nullable": true,
-      
       "label": "Dt Test"
     },
     "enabled": {
@@ -57,8 +62,15 @@
       "size": 0,
       "default": null,
       "nullable": true,
-      
       "label": "enabled"
+    },
+    "big_text": {
+      "name": "big_text",
+      "type": "text",
+      "size": 200000,
+      "default": null,
+      "nullable": true,
+      "label": "Big Text"
     }
   }
 }
