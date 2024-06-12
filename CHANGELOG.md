@@ -1,8 +1,9 @@
 # CHANGELOG
 
-- version 1.2.6
-  - update to @dictadata/storage-junctions 0.9.113
-
+- version 0.9.6
+  - refactor: use utils from @dictadata/lib
+  - updated: @dictadata/storage-junctions 0.9.114
+  - refactor: updated version numbering for dictadata storage projects
 - version 1.1.5
   - update to @dictadata/storage-junctions 1.8.2
 - version 1.1.4

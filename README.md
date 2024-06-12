@@ -1,4 +1,4 @@
-# s3-filesystem 1.2.x
+# s3-filesystem 0.9.x
 
 S3 filesystem plugin for @dictadata/storage-junctions.
 
