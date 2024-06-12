@@ -3,10 +3,9 @@
  */
 "use strict";
 
-const Storage = require("@dictadata/storage-junctions");
 const { StorageFileSystem } = require("@dictadata/storage-junctions");
 const { SMT, StorageResults, StorageError } = require("@dictadata/storage-junctions/types");
-const { logger } = require("@dictadata/storage-junctions/utils");
+const { logger } = require("@dictadata/lib");
 
 const fs = require('fs');
 const fsp = require('fs/promises');
@@ -365,4 +364,3 @@ class S3FileSystem extends StorageFileSystem {
 };
 
 module.exports = exports = S3FileSystem;
-Storage.FileSystems.use('S3', S3FileSystem);

@@ -1,4 +1,4 @@
-# s3-filesystem 1.8.x
+# s3-filesystem 1.2.x
 
 S3 filesystem plugin for @dictadata/storage-junctions.
 
@@ -12,13 +12,13 @@ npm i @dictadata/s3-filesystem
 ## Registering the Plugin
 
 ```javascript
-const storage = require("@dictadata/storage-junctions");
+const { Storage } = require("@dictadata/storage-junctions");
 const S3FileSystem = require("@dictadata/s3-filesystem");
 
-storage.FileSystems.use("s3", S3FileSystem);
+Storage.FileSystems.use("s3", S3FileSystem);
 ```
 
-## Usage in Storage Memory Trace
+## Usage in SMT Identifiers
 
 Example SMT string for accessing json files in an S3 bucket.
 
@@ -30,7 +30,7 @@ Where:
 
 - "json" - ***smt model*** of junction used to encode and query data in the storage source.
 - "s3:dictadata/test/data/" - ***smt locus*** locator address for the storage source.
-  - "S3" - ***filesystem model*** used to access data containers in the storage source.
+  - "s3" - ***filesystem model*** used to access data containers in the storage source.
   - "dictadata.org" - *S3 bucket* name.
   - "/data/" - *S3 prefix* for object names.
 - "foo_*" - ***smt schema*** specification for *S3 object names* with wildcard.

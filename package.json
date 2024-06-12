@@ -1,6 +1,6 @@
 {
   "name": "@dictadata/s3-filesystem",
-  "version": "1.8.2",
+  "version": "1.2.5",
   "description": "S3 filesystem plugin for @dictadata/storage-junctions.",
   "main": "index.js",
   "scripts": {
@@ -25,18 +25,18 @@
   "engines": {
     "node": ">=15.0.1"
   },
-  "dependencies": {
-    "@aws-sdk/client-s3": "^3.470.0",
-    "@aws-sdk/credential-providers": "^3.470.0",
-    "@aws-sdk/lib-storage": "^3.470.0",
-    "@aws-sdk/shared-ini-file-loader": "^3.374.0",
-    "@dictadata/storage-junctions": "^0.9.95",
-    "winston": "^3.3.3"
-  },
   "devDependencies": {
     "colors": "^1.4.0",
     "eslint": "^8.55.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.470.0",
+    "@aws-sdk/credential-providers": "^3.470.0",
+    "@aws-sdk/lib-storage": "^3.470.0",
+    "@aws-sdk/shared-ini-file-loader": "^3.374.0",
+    "@dictadata/lib": "github:dictadata/lib#semver:1.0",
+    "@dictadata/storage-junctions": "^0.9.114"
   }
 }

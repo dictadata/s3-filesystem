@@ -3,8 +3,8 @@
  */
 "use strict";
 
-require("../register");
-const { logger } = require("@dictadata/storage-junctions/utils");
+require("../_register");
+const { logger } = require("@dictadata/lib");
 const { getFiles, putFiles } = require('@dictadata/storage-junctions/test');
 
 logger.info("=== tests: S3 copy files");
@@ -47,13 +47,13 @@ async function test_3() {
 
   if (await putFiles({
     origin: {
-      smt: "*|/var/dictadata/US/IA/sos.iowa.gov/shapefiles/City Precincts/|A*.*|*",
+      smt: "*|/var/dictadata/IA/sos.iowa.gov/shapefiles/City Precincts/|A*.*|*",
       options: {
         recursive: true
       }
     },
     terminal: {
-      smt: "*|s3:dictadata/US/IA/sos.iowa.gov/shapefiles/City Precincts/|*|*",
+      smt: "*|s3:dictadata/IA/sos.iowa.gov/shapefiles/City Precincts/|*|*",
       options: {
         useRPath: true
       }
@@ -66,7 +66,7 @@ async function test_4() {
 
   if (await getFiles({
     origin: {
-      smt: "*|s3:dictadata/US/IA/sos.iowa.gov/shapefiles/City Precincts/|A*.*|*",
+      smt: "*|s3:dictadata/IA/sos.iowa.gov/shapefiles/City Precincts/|A*.*|*",
       options: {
         recursive: true
       }
