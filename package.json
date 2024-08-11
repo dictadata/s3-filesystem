@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/dictadata/js/s3-filesystem.git"
+    "url": "git+ssh://git@github.com:dictadata/s3-filesystem.git"
   },
   "keywords": [
     "dictadata",
@@ -19,9 +19,9 @@
   "author": "Drew O. Letcher",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/dictadata/js/s3-filesystem/issues"
+    "url": "https://github.com/dictadata/s3-filesystem/issues"
   },
-  "homepage": "https://gitlab.com/dictadata/js/s3-filesystem#readme",
+  "homepage": "https://github.com/dictadata/s3-filesystem#readme",
   "engines": {
     "node": ">=15.0.1"
   },
